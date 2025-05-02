@@ -45,7 +45,7 @@ func main() {
 	// 	fmt.Println("Received from c2", msg2)
 	// }
 
-	fmt.Println("起始 goroutines:", runtime.NumGoroutine())
+	// fmt.Println("起始 goroutines:", runtime.NumGoroutine())
 
 	// var wg sync.WaitGroup // 建立 WaitGroup 變數
 
@@ -77,6 +77,12 @@ func main() {
 	fmt.Println("所有goroutine工作完成")
 	fmt.Println("結束後 goroutines:", runtime.NumGoroutine())
 
+	var wgmutex sync.WaitGroup
+	for i := 0; i < 100; i++ {
+		wgmutex.Add(1)
+		go muxtexTest(&wgmutex)
+	}
+	wgmutex.Wait()
 	// fmt.Println("Hello, World!", externalAlias.ExportedValue, externalAlias.Myexternalfunc())
 	// fmt.Println(quote.Go())
 	// fmt.Println(globalVar)
